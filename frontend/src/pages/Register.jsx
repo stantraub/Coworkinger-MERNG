@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import gql from 'graphql-tag'
 import { useMutation } from "@apollo/react-hooks"
 import './Register.css'
 import { useForm } from '../util/hooks'
+import { AuthContext } from '../context/auth'
 import { Link } from 'react-router-dom'
 
 function Register(props) {
+    const context = useContext(AuthContext)
     const [errors, setErrors] = useState({})
 
     const { onChange, onSubmit, values } = useForm(registerUser, {
@@ -16,7 +18,8 @@ function Register(props) {
     });
 
     const [addUser, { loading }] = useMutation(REGISTER_USER, {
-        update(_, result) {
+        update(_, { data: { register: userData}}) {
+        context.login(userData)
         props.history.push('/')
         },
         onError(err) {
@@ -40,7 +43,7 @@ function Register(props) {
               placeholder="Username"
               name="username"
               value={values.username}
-              error={errors.username ? true : false}
+              error={errors.username ? true : undefined}
               onChange={onChange}
             />
           </div>
@@ -51,7 +54,7 @@ function Register(props) {
               placeholder="Email"
               name="email"
               value={values.email}
-              error={errors.email ? true : false}
+              error={errors.email ? true : undefined}
               onChange={onChange}
             />
           </div>
@@ -62,7 +65,7 @@ function Register(props) {
               placeholder="Password"
               name="password"
               value={values.password}
-              error={errors.password ? true : false}
+              error={errors.password ? true : undefined}
               onChange={onChange}
             />
           </div>
@@ -73,7 +76,7 @@ function Register(props) {
               placeholder="Confirm Password"
               name="confirmPassword"
               value={values.confirmPassword}
-              error={errors.confirmPassword ? true : false}
+              error={errors.confirmPassword ? true : undefined}
               onChange={onChange}
             />
           </div>

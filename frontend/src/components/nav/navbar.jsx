@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './navbar.css'
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile
-} from "react-device-detect";
+
+import { AuthContext } from '../../context/auth'
 
 const Navbar = () => {
-    return (
+    const { user, logout } = useContext(AuthContext)
+
+    const navBar = user ? (
+      <div className="main-nav">
+        <span>
+          <Link to="/" className="main-logo">
+            Coworking
+          </Link>
+        </span>
+        <div className="action-buttons-wrapper">
+          <div className="action-item">
+            <Link
+              style={{ textDecoration: "none", color: "black" }}
+              to={"/spaces"}
+            >
+              <span>Find a workspace</span>
+            </Link>
+          </div>
+          <div className="action-item">
+              <span onClick={logout} style={{ textDecoration: "none", color: "black" }}>Logout</span>
+          </div>
+        </div>
+      </div>
+    ) : (
       <div className="main-nav">
         <span>
           <Link to="/" className="main-logo">
@@ -41,11 +60,11 @@ const Navbar = () => {
               <span>Sign Up</span>
             </Link>
           </div>
-          
         </div>
       </div>
     );
-    }
+    return navBar;
+}
 
 export default Navbar;
 

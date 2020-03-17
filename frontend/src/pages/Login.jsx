@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from  'react-router-dom'
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
+import { AuthContext } from '../context/auth'
 import { useForm } from '../util/hooks'
 import "./Register.css";
 
 function Login(props) {
+    const context = useContext(AuthContext)
     const [errors, setErrors] = useState({})
 
     const {onChange, onSubmit, values} = useForm(loginUserCallback, {
@@ -14,8 +16,9 @@ function Login(props) {
     });
 
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-        update(_, result) {
+        update(_, { data: { login: userData }}) {
         props.history.push("/");
+        context.login(userData)
         },
         onError(err) {
         setErrors(err.graphQLErrors[0].extensions.exception.errors);
@@ -38,7 +41,7 @@ function Login(props) {
               placeholder="Username"
               name="username"
               value={values.username}
-              error={errors.username ? true : false}
+              error={errors.username ? true : undefined}
               onChange={onChange}
             />
           </div>
@@ -49,7 +52,7 @@ function Login(props) {
               placeholder="Password"
               name="password"
               value={values.password}
-              error={errors.password ? true : false}
+              error={errors.password ? true : undefined}
               onChange={onChange}
             />
           </div>
@@ -75,17 +78,12 @@ function Login(props) {
     }
 
     const LOGIN_USER = gql`
-    mutation login(
-        $username: String!
-        $password: String!
-    ) {
-        login(
-            username: $username password: $password
-        ) {
-        id
-        email
-        username
-        token
+    mutation login($username: String! $password: String!) {
+        login(username: $username password: $password) {
+            id
+            email
+            username
+            token
         }
     }
 `;
