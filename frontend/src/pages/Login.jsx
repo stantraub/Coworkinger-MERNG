@@ -16,7 +16,7 @@ function Login(props) {
     });
 
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
-        update(_, { data: { login: userData }}) {
+        update(_, { data: { login: userData }}) { //update cache with userData after mutation occurs
         props.history.push("/");
         context.login(userData)
         },

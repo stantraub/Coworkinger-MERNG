@@ -15,7 +15,7 @@ class SpaceItem extends React.Component {
 
   includedAmenities() {
     let included = ""
-
+    console.log(this.props)
     if (this.props.availability) {
       included += "Space available · "
     }
@@ -43,7 +43,10 @@ class SpaceItem extends React.Component {
   render() {
     return (
       <div className="space-item-wrapper">
-        <img className="main-pic" src={this.props.mainPhoto} />
+        <Link to={`/spaces/${this.props.spaceId}`} className="space-link">
+          <img className="main-pic" src={this.props.mainPhoto} />
+        </Link>
+        <Link to={`/spaces/${this.props.spaceId}`} className="space-link">
         <div className="space-item-info">
           <div className="space-item-name">{this.props.name}</div>
           <div className="space-item-amenities">
@@ -63,6 +66,7 @@ class SpaceItem extends React.Component {
             <strong>${this.props.cost}</strong> per desk / month
           </div>
         </div>
+        </Link>
       </div>
     );
   }

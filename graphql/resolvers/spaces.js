@@ -27,7 +27,6 @@ module.exports = {
     async createSpace(_, { ...args }, context) {
         const user = checkAuth(context)
 
-
         const newSpace = new Space({
           name: args.spaceInput.name,
           address: args.spaceInput.address,

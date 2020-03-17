@@ -1,6 +1,6 @@
 import React from 'react';
-import PicsCarousel from '../modals/pics_carousel';
-import AmenitiesModal from '../modals/amenities_modal';
+// import PicsCarousel from '../modals/pics_carousel';
+// import AmenitiesModal from '../modals/amenities_modal';
 import {
   BrowserView,
   MobileView,

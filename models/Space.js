@@ -58,7 +58,7 @@ const spaceSchema = new Schema({
     type: Number,
     required: false
   },
-  people_capacity: {
+  peopleCapacity: {
     type: Number,
     required: false
   },

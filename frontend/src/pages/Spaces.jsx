@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import SpaceItem from "../components/spaces/space_item";
 import "./Spaces.css";
 const SpacesPage = ({spaces}) => {
+  console.log(spaces)
   return (
     <div className="space-index-main">
       <div className="spaces-index-spaces-wrapper">

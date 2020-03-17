@@ -2,8 +2,8 @@ import React from 'react'
 import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost'
 
-import Spinner from '../spinner/spinner'
-import Spaces from '../../pages/Spaces'
+import Spinner from '../components/spinner/spinner'
+import Spaces from './Spaces'
 
 const GET_SPACES = gql`
   {
