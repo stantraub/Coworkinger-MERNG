@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NavBar from './components/nav/navbar'
 import SpacesContainer from './pages/space_index_container'
-import SpaceShowContainer from './components/spaces/space_show_container'
+import SpaceShowContainer from './pages/SpaceShowContainer'
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <AuthRoute exact path="/login" component={Login} />
         <AuthRoute exact path="/register" component={Register} />
         <Route exact path="/spaces" component={SpacesContainer} />
-        <Route exact path="/spaces/:id" component={SpaceShowContainer} />
+        <Route exact path="/spaces/:spaceId" component={SpaceShowContainer} />
       </Router>
     </AuthProvider>
   );

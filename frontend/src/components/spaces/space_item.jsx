@@ -1,12 +1,6 @@
 import React from 'react';
 import './space_item.css'
 import { Link } from 'react-router-dom';
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile
-} from "react-device-detect";
 
 class SpaceItem extends React.Component {
   constructor(props) {
